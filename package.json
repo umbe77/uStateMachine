@@ -1,0 +1,15 @@
+{
+  "name": "ustatemachine",
+  "version": "1.0.0",
+  "description": "Yet Another State Machine Workflow",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "workflow",
+    "statemachine"
+  ],
+  "author": "Roberto Ughi",
+  "license": "MIT"
+}
