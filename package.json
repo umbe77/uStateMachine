@@ -11,5 +11,9 @@
     "statemachine"
   ],
   "author": "Roberto Ughi",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "semver": "^5.3.0",
+    "uuid": "^3.0.1"
+  }
 }

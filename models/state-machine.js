@@ -6,11 +6,19 @@ class StateMachine {
     constructor(name) {
         privateMembers.set(this, {
             name: name,
-            data: {},
+            version: "1.0.0",
+            dataSchema: {},
             states: {},
-            current: {},
             initial: {}
         })
+    }
+
+    get version() {
+        return privateMembers.get(this).version
+    }
+
+    get name() {
+        return privateMembers.get(this).name
     }
 }
 
