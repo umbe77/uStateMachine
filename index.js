@@ -1,8 +1,32 @@
-const WorkflowInstance = require("./models/WorkflowInstance")
+const StateMachine = require('./models/state-machine')
 
-let inst = WorkflowInstance.createInstance({
-    name: "Pippo",
-    version: "1.0.0"
-}, {
-    firstName: "Roberto"
+let sm = StateMachine.load({
+    name: "FirstWF",
+    version: "1.0.0",
+    states: {
+        "PreOrder": {
+            name: "PreOrder",
+            transitions: {
+                "InOrder": {
+                    destination: "InOrder"
+                },
+                "OrderSent": {
+                    destination: "OrderSent"
+                }
+            }
+        },
+        "InOrder": {
+            name: "InOrder",
+            transitions: {
+                "OrderSent": {
+                    destination: "OrderSent"
+                }
+            }
+        },
+        "OrderSent": {
+            name: "OrderSent",
+            transitions: {}
+        }
+    },
+    initial: "PreOrder"
 })

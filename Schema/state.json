@@ -1,0 +1,24 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema",
+    "id": "/state",
+    "description": "State Schema Definition",
+    "title": "State",
+    "properties": {
+        "name": {
+            "type": "string"
+        },
+        "transitions": {
+            "type": "object",
+            "patternProperties": {
+                "^\\w+$": {
+                    "$ref": "/transition"
+                }
+            }
+        }
+    },
+    "required": [
+        "name",
+        "transitions"
+    ],
+    "additionalProperties": false
+}

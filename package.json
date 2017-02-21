@@ -13,6 +13,7 @@
   "author": "Roberto Ughi",
   "license": "MIT",
   "dependencies": {
+    "jsonschema": "^1.1.1",
     "semver": "^5.3.0",
     "uuid": "^3.0.1"
   }

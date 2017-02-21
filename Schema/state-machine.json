@@ -1,0 +1,30 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema",
+    "id": "/state-machine",
+    "description": "State Machine Schema Definition",
+    "title": "StateMachine",
+    "properties": {
+        "name": {
+            "type": "string"
+        },
+        "version": {
+            "type": "string",
+            "pattern": "^\\d+\\.\\d+\\.\\d+$"
+        },
+        "states": {
+            "type": "object",
+            "patternProperties": {
+                "^\\w+$": {
+                    "$ref": "/state"
+                }
+            },
+            "additionalProperties": false
+        },
+        "initial": {
+            "type": "string",
+            "pattern": "^\\w+$"
+        }
+    },
+    "required": ["name", "version", "states", "initial"],
+    "additionalProperties": false
+}
