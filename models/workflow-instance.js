@@ -22,7 +22,27 @@ class WorkflowInstance {
         return inst
     }
 
+    get data() {
+        return privateMembers.get(this).data
+    }
 
+    set data(value) {
+        let p = privateMembers.get(this) 
+        p.data = Object.assign(p.data, value)
+    }
+
+    get instanceId() {
+        return privateMembers.get(this).instanceId
+    }
+
+    get currentState() {
+        return privateMembers.get(this).currentState
+    }
+
+    set currentState(value) {
+        privateMembers.get(this).currentState = value
+    }
+    
 }
 
 module.exports = WorkflowInstance
