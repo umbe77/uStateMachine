@@ -1,4 +1,9 @@
+
+global.appRootDir = __dirname
+
 const StateMachine = require('./models/state-machine')
+
+
 
 let sm = StateMachine.load({
     name: "FirstWF",

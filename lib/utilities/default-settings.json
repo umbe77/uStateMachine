@@ -1,0 +1,6 @@
+{
+    "providerLocation": "~/providers",
+    "cache": {
+        "provider": "memory"
+    }
+}

@@ -1,11 +1,10 @@
 
 const mocha = require('mocha')
-const chai = require('chai')
 
-const assert = chai.assert
+const assert = require('assert')
 
-const WorkflowEngine = require('../engine/engine')
-const StateMachine = require('../models/state-machine')
+const WorkflowEngine = require('../lib/engine/engine')
+const StateMachine = require('../lib/models/state-machine')
 const {validSchema} = require('./constants')
 
 describe('WF Engine', function(){

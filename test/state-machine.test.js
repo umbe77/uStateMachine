@@ -1,11 +1,9 @@
 
 const mocha = require('mocha')
-const chai = require('chai')
+const assert = require('assert')
 
-const assert = chai.assert
-
-const StateMachine = require('../models/state-machine')
-const {SUCCESS, ERROR} = require('../utilities/constants')
+const StateMachine = require('../lib/models/state-machine')
+const {SUCCESS, ERROR} = require('../lib/utilities/constants')
 
 const {validSchema, notValidSchema} = require('./constants')
 
