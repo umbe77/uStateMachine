@@ -2,5 +2,12 @@
     "providerLocation": "~/providers",
     "cache": {
         "provider": "memory"
+    },
+    "persistance": {
+        "provider": "filesystem",
+        "options": {
+            "stateMachines": "~/persistance/statemachines",
+            "instances": "~/persistance/instances"
+        }
     }
 }

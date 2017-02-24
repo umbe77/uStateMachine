@@ -8,12 +8,19 @@ const customSettings = {
     }
 }
 
-//mock global.appRootDir
-global.appRootDir = require('path').resolve('./')
-
-const {initSettings} = require('../lib/utilities/settings')
-
 describe('Settings', function(){
+    let initSettings = undefined
+
+    //mock global.appRootDir
+    before(() => {
+        initSettings = require('../lib/utilities/settings').initSettings
+        global.appRootDir = require('path').resolve('./')
+    })
+
+    after(() => {
+        global.appRootDir = undefined
+    })
+
     it('should init settings with default values', function(){
         const settings = initSettings(defaultSettings, {})
         assert.equal(settings["cache"]["provider"], "memory", "default cache provider is memory")
