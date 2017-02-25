@@ -58,7 +58,39 @@ const notValidSchema = {
     }
 }
 
+const smFirst_2 = {
+    "name": "FirstWF",
+    "version": "2.0.0",
+    "states": {
+        "PreOrder": {
+            "name": "PreOrder",
+            "transitions": {
+                "InOrder": {
+                    "destination": "InOrder"
+                },
+                "OrderSent": {
+                    "destination": "OrderSent"
+                }
+            }
+        },
+        "InOrder": {
+            "name": "InOrder",
+            "transitions": {
+                "OrderSent": {
+                    "destination": "OrderSent"
+                }
+            }
+        },
+        "OrderSent": {
+            "name": "OrderSent",
+            "transitions": {}
+        }
+    },
+    "initial": "PreOrder"
+}
+
 module.exports = {
     validSchema: validSchema,
-    notValidSchema: notValidSchema
+    notValidSchema: notValidSchema,
+    smFirst_2: smFirst_2
 }

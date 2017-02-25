@@ -2,6 +2,8 @@
 const mocha = require('mocha')
 const assert = require('assert')
 
+const semver = require('semver')
+
 const StateMachine = require('../lib/models/state-machine')
 
 const {validSchema, notValidSchema} = require('./constants')
@@ -25,6 +27,9 @@ describe('StateMachine Loading', () => {
     it('should StateMachine loaded', (done) => {
         StateMachine.load(validSchema, (err, sm) => {
             assert.equal(sm.name, "FirstWF", 'Schema Loaded')
+            
+            assert.ok(semver.eq("1.0.0", sm.version), "Schema Version is ok")
+
             assert.equal(sm.initialState, "PreOrder", 'intial state as expected')
             done()
         })
