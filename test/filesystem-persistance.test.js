@@ -16,12 +16,22 @@ describe('Filesystem persistance provider', function () {
         global.appRootDir = undefined
     })
 
-    it('should load StateMachine from filesystem', (done) => {
-        let sm = StateMachine.load(expectedSm)
-        filesystem.loadStateMachines((smList) => {
-            assert.equal(smList.length, 1, "got sm from filesystem")
-            assert.deepEqual(smList[0], sm, "StateMachine is right")
-            done()
+    it('should load StateMachines from filesystem', (done) => {
+        StateMachine.load(expectedSm, (err, _sm) => {
+            filesystem.loadStateMachines((err, smList) => {
+                assert.equal(smList.length, 1, "got sm from filesystem")
+                assert.deepEqual(smList[0], _sm, "StateMachine is right")
+                done()
+            })
+        })
+    })
+
+    it('should load StateMachine firstwf with version 1.0.0 from filesystem', (done) => {
+        StateMachine.load(expectedSm, (err, _sm) => {
+            filesystem.loadStateMachine('FirstWf', '1.0.0', (err, sm) => {
+                assert.deepEqual(sm, _sm, "StateMachine loaded from disk")
+                done()
+            })
         })
     })
 })

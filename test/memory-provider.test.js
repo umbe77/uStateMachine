@@ -6,13 +6,25 @@ const {validSchema} = require('./constants')
 
 const StateMachine = require('../lib/models/state-machine')
 
-describe('Memory cache provider', function() {
+describe('Memory cache provider', () => {
     it('should add StateMachine in Memory cache', (done) => {
-        let sm = StateMachine.load(validSchema)
-        memory.pushStateMachine(sm, () => {
-            memory.getStateMachine(sm.name, (err, res) => {
-                assert.deepEqual(res, sm, "Object from cache")
-                done()
+        StateMachine.load(validSchema, (err, sm) => {
+            memory.pushStateMachine(sm, () => {
+                memory.getStateMachine(sm.name, sm.version, (err, res) => {
+                    assert.deepEqual(res, sm, "Object from cache")
+                    done()
+                })
+            })
+        })
+    })
+    it('should get error when get a StateMachine not in cache', (done) => {
+        StateMachine.load(validSchema, (err, sm) => {
+            memory.pushStateMachine(sm, () => {
+                memory.getStateMachine(sm.name, "1.1.0", (err, res) => {
+                    assert.equal(err.message, `Cannot find StateMachine: ${sm.name} version: 1.1.0`)
+                    assert.equal(res, undefined, "Object isn't in cache")
+                    done()
+                })
             })
         })
     })

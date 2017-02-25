@@ -3,25 +3,30 @@ const mocha = require('mocha')
 const assert = require('assert')
 
 const StateMachine = require('../lib/models/state-machine')
-const {SUCCESS, ERROR} = require('../lib/utilities/constants')
 
 const {validSchema, notValidSchema} = require('./constants')
 
-describe('StateMachine validation', function(){
-    it('should validate schema', function() {
-        let validity = StateMachine.validateStateMachine(validSchema)
-        assert.equal(validity.status, SUCCESS, "Schema is Valid")
+describe('StateMachine validation', () => {
+    it('should validate schema', (done) => {
+        StateMachine.validateStateMachine(validSchema, (err, isValid) => {
+            assert.ok(isValid, "Schema is valid")
+            done()
+        })
     })
-    it('should not validate the schema', function() {
-        let validity = StateMachine.validateStateMachine(notValidSchema)
-        assert.equal(validity.status, ERROR, `Schema isn't valid due the following errors: ${validity.errors.join(', ')}`)
+    it('should not validate the schema', (done) => {
+        StateMachine.validateStateMachine(notValidSchema, (err, isValid) => {
+            assert.equal(isValid, false, `Schema isn't valid due the following errors: ${err.join(', ')}`)
+            done()
+        })
     })
 })
 
-describe('StateMachine Loading', function(){
-    it('should StateMachine loaded', function() { 
-        let sm = StateMachine.load(validSchema)
-        assert.equal(sm.name, "FirstWF", 'Schema Loaded')
-        assert.equal(sm.initialState, "PreOrder", 'intial state as expected')
+describe('StateMachine Loading', () => {
+    it('should StateMachine loaded', (done) => {
+        StateMachine.load(validSchema, (err, sm) => {
+            assert.equal(sm.name, "FirstWF", 'Schema Loaded')
+            assert.equal(sm.initialState, "PreOrder", 'intial state as expected')
+            done()
+        })
     })
 }) 
