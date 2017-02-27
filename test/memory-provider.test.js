@@ -28,4 +28,17 @@ describe('Memory cache provider', () => {
             })
         })
     })
+    it('should remove StateMachine from cache', (done) => {
+        StateMachine.load(validSchema, (err, sm) => {
+            memory.pushStateMachine(sm, () => {
+                memory.removeStateMachine(sm.name, sm.version, () => {
+                    memory.getStateMachine(sm.name, sm.version, (errGet, _sm) => {
+                        assert.equal(errGet.message, `Cannot find StateMachine: ${_sm.name} version: ${_sm.version}`)
+                    })
+                    done()
+                })
+            })
+        })
+    })
+    
 })

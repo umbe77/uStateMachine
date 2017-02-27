@@ -1,13 +1,11 @@
 {
-    "providerLocation": "~/providers",
     "cache": {
         "provider": "memory"
     },
     "persistance": {
-        "provider": "filesystem",
+        "provider": "embed",
         "options": {
-            "stateMachines": "~/persistance/statemachines",
-            "instances": "~/persistance/instances"
+            "path": "~/persistance/statemachines.nosql"
         }
     }
 }

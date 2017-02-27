@@ -13,18 +13,17 @@ describe('WF Engine', () => {
             let result = WorkflowEngine.createInstance(sm, {
                 firstName: "Roberto",
                 lastName: "Ughi"
+            }, (err, instance) => {
+                assert.ifError(err, "No Error in instance creation")
+
+                assert.equal(instance.currentState, "PreOrder", 'Initial State is PreOrder')
+                assert.deepEqual(instance.data, {
+                    firstName: "Roberto",
+                    lastName: "Ughi"
+                }, 'instance data is as excpeted')
+                done()
             })
 
-            assert.equal(result.code, 1, 'instance created succesfully')
-
-            let instance = result.instance
-
-            assert.equal(instance.currentState, "PreOrder", 'Initial State is PreOrder')
-            assert.deepEqual(instance.data, {
-                firstName: "Roberto",
-                lastName: "Ughi"
-            }, 'instance data is as excpeted')
-            done()
         })
     })
 })
