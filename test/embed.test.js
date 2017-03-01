@@ -5,8 +5,9 @@ const engine = require('nosql')
 
 const {initSettings, resetDef} = require('../lib/utilities/settings')
 const defaultSettings = require('../lib/utilities/default-settings.json')
-const {validSchema} = require('./constants')
+const {validSchema, an_instance} = require('./constants')
 const StateMachine = require('../lib/models/state-machine')
+const WorkflowInstance = require('../lib/models/workflow-instance')
 
 describe('embed persistance provider', () => {
     let embed = undefined
@@ -23,8 +24,10 @@ describe('embed persistance provider', () => {
             }
         })
         db = engine.load(`${__dirname}/persistance/statemachines.nosql`)
-        db.insert(Object.assign({}, validSchema)).callback((err) => {
-            done()
+        db.insert(Object.assign({}, validSchema, { kind: "StateMachines" })).callback((err) => {
+            db.insert(Object.assign({}, an_instance, { kind: "Instances" })).callback((err) => {
+                done()
+            })
         })
     })
     after((done) => {
@@ -38,7 +41,7 @@ describe('embed persistance provider', () => {
         })
     })
 
-    it('sholud load statemachines', (done) => {
+    it('should load statemachines', (done) => {
         StateMachine.load(validSchema, (err, _sm) => {
             embed.loadStateMachines((err, _smlist) => {
                 assert.equal(_smlist.length, 1, "got sm from embed")
@@ -57,12 +60,19 @@ describe('embed persistance provider', () => {
         })
     })
 
-    it('should persist StateMachine smFirst_2 on filesystem', (done) => {
+    it('should persist StateMachine smFirst_2 on embed', (done) => {
         StateMachine.load(require('./constants').smFirst_2, (err, sm) => {
             embed.saveStateMachine(sm, (err) => {
                 assert.equal(!!err, false, "StatemMAchine Saved")
                 done()
             })
+        })
+    })
+
+    it('should load instance from embed', (done) => {
+        embed.loadInstance("27e8f2bf-e9a4-4503-b0a0-5a5c67259fc2", (err, instance) => {
+            assert.deepEqual(instance.plain(), an_instance)
+            done()
         })
     })
 

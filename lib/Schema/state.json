@@ -7,6 +7,12 @@
         "name": {
             "type": "string"
         },
+        "onEnter": {
+            "type": "string"
+        },
+        "onExit": {
+            "type": "string"
+        },
         "transitions": {
             "type": "object",
             "patternProperties": {
