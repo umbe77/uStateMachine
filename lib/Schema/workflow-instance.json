@@ -1,0 +1,48 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema",
+    "id": "/workflow-instance",
+    "title": "WorkflowInstance",
+    "description": "Workflow Instance Schema Definition",
+    "properties": {
+        "instanceId": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+        },
+        "version": {
+            "type": "string",
+            "pattern": "^\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}$"
+        },
+        "currentState": {
+            "type": "string"
+        },
+        "smName": {
+            "type": "string"
+        },
+        "lastChangeDate": {
+            "type": "string",
+            "format": "date-time"
+        },
+        "data": {
+            "type": "object"
+        },
+        "status": {
+            "type": "string",
+            "enum": [
+                "Idle",
+                "Locked",
+                "Active"
+            ]
+        }
+    },
+    "required": [
+        "instanceId",
+        "version",
+        "currentState",
+        "smName",
+        "lastChangeDate",
+        "data",
+        "status"
+    ],
+    "additionalProperties": false
+}
+

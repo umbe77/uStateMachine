@@ -1,3 +1,5 @@
+const status = require('../lib/models/workflow-instance-constants')
+
 const validSchema = {
     name: "FirstWF",
     version: "1.0.0",
@@ -98,6 +100,7 @@ const a_onenter = {
             name: "PreOrder",
             onEnter: `
                 data.city = "Livorno"
+                end()
             `,
             transitions: {
                 "InOrder": {
@@ -109,6 +112,7 @@ const a_onenter = {
             name: "InOrder",
             onEnter: `
                 canContinue = (currentData === 'Livorno')
+                end()
             `,
             transitions: {
                 "OrderSent": {
@@ -132,9 +136,11 @@ const a_onexit = {
             name: "PreOrder",
             onEnter: `
                 data.city = "Livorno"
+                end()
             `,
             onExit: `
                 currentData.state = "Toscana"
+                end()
             `,
             transitions: {
                 "InOrder": {
@@ -146,6 +152,7 @@ const a_onexit = {
             name: "InOrder",
             onEnter: `
                 canContinue = (currentData.city === 'Livorno')
+                end()
             `,
             transitions: {
                 "OrderSent": {
@@ -227,7 +234,8 @@ const an_instance = {
     "version": "1.0.0",
     "smName":  "FirstWF",
     "currentState": "PreOrder",
-    "lastChangeDate": new Date(),
+    "lastChangeDate": new Date(Date.parse('2017-03-03T00:38:03')),
+    "status": status.IDLE,
     "data": {
         "firstName": "Roberto",
         "lastName": "Ughi"
