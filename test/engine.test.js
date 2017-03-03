@@ -1,12 +1,17 @@
-
 const mocha = require('mocha')
 
 const assert = require('assert')
 
 const WorkflowEngine = require('../lib/engine/engine')
 const StateMachine = require('../lib/models/state-machine')
-const {validSchema, validSchema_wrongstate,
-    validSchema_dontchecktransition, a_onenter, a_onexit} = require('./constants')
+const {
+    validSchema,
+    validSchema_wrongstate,
+    validSchema_dontchecktransition,
+    a_onenter,
+    a_onexit,
+    a_onexit_timeout
+} = require('./constants')
 const CantMoveError = require('../lib/utilities/CantMoveError')
 const CantContinueError = require('../lib/utilities/CantContinueError')
 
@@ -45,7 +50,10 @@ describe('WF Engine', () => {
                     stateMachine,
                     transition,
                     data
-                }, (err, {instance, oldInstance}) => {
+                }, (err, {
+                    instance,
+                    oldInstance
+                }) => {
                     assert.ifError(err)
                     assert.equal(instance.instanceId, inst.instanceId)
                     assert.equal(instance.data.firstName, "Umbe")
@@ -71,7 +79,10 @@ describe('WF Engine', () => {
                     stateMachine,
                     transition,
                     data
-                }, (err, {instance, oldInstance}) => {
+                }, (err, {
+                    instance,
+                    oldInstance
+                }) => {
                     assert.ok(err instanceof CantMoveError)
                     done()
                 })
@@ -94,7 +105,10 @@ describe('WF Engine', () => {
                     stateMachine,
                     transition,
                     data
-                }, (err, {instance, oldInstance}) => {
+                }, (err, {
+                    instance,
+                    oldInstance
+                }) => {
                     assert.ok(err instanceof CantMoveError)
                     done()
                 })
@@ -117,7 +131,10 @@ describe('WF Engine', () => {
                     stateMachine,
                     transition,
                     data
-                }, (err, {instance, oldInstance}) => {
+                }, (err, {
+                    instance,
+                    oldInstance
+                }) => {
                     assert.ifError(err)
                     assert.equal(instance.instanceId, inst.instanceId)
                     assert.equal(instance.data.firstName, "Umbe")
@@ -158,7 +175,10 @@ describe('WF Engine', () => {
                     stateMachine,
                     transition,
                     data
-                }, (err, {instance, oldInstance}) => {
+                }, (err, {
+                    instance,
+                    oldInstance
+                }) => {
                     assert.ok(err instanceof CantContinueError)
                     assert.equal(instance.instanceId, inst.instanceId)
                     assert.equal(instance.data.firstName, "Roberto")
@@ -183,7 +203,35 @@ describe('WF Engine', () => {
                     stateMachine,
                     transition,
                     data
-                }, (err, {instance, oldInstance}) => {
+                }, (err, {
+                    instance,
+                    oldInstance
+                }) => {
+                    assert.equal(instance.instanceId, inst.instanceId)
+                    assert.equal(instance.data.state, "Toscana")
+                    done()
+                })
+            })
+        })
+    })
+
+    it('should instance update its data during onExit event with timeout', (done) => {
+        StateMachine.load(a_onexit_timeout, (err, stateMachine) => {
+            WorkflowEngine.createInstance(stateMachine, {
+                firstName: "Roberto",
+                lastName: "Ughi"
+            }, (err, inst) => {
+                const transition = "InOrder"
+                const data = {}
+                WorkflowEngine.execute({
+                    instance: inst,
+                    stateMachine,
+                    transition,
+                    data
+                }, (err, {
+                    instance,
+                    oldInstance
+                }) => {
                     assert.equal(instance.instanceId, inst.instanceId)
                     assert.equal(instance.data.state, "Toscana")
                     done()

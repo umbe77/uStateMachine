@@ -168,6 +168,47 @@ const a_onexit = {
     initial: "PreOrder"
 }
 
+const a_onexit_timeout = {
+    name: "FirstWF",
+    version: "1.0.0",
+    states: {
+        "PreOrder": {
+            name: "PreOrder",
+            onEnter: `
+                data.city = "Livorno"
+                end()
+            `,
+            onExit: `
+                setTimeout(() => {
+                    currentData.state = "Toscana"
+                    end()
+                }, 200)
+            `,
+            transitions: {
+                "InOrder": {
+                    destination: "InOrder"
+                }
+            }
+        },
+        "InOrder": {
+            name: "InOrder",
+            onEnter: `
+                canContinue = (currentData.city === 'Livorno')
+                end()
+            `,
+            transitions: {
+                "OrderSent": {
+                    destination: "OrderSent"
+                }
+            }
+        },
+        "OrderSent": {
+            name: "OrderSent",
+            transitions: {}
+        }
+    },
+    initial: "PreOrder"
+}
 
 const notValidSchema = {
     name: "FirstWF",
@@ -245,6 +286,7 @@ const an_instance = {
 module.exports = {
     a_onenter,
     a_onexit,
+    a_onexit_timeout,
     validSchema,
     notValidSchema,
     smFirst_2,
