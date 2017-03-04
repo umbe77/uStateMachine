@@ -1,6 +1,7 @@
 {
     "cache": {
-        "provider": "memory"
+        "provider": "memory",
+        "timeout": 300000
     },
     "persistance": {
         "provider": "embed",

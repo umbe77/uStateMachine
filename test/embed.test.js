@@ -7,8 +7,8 @@ const {initSettings, resetDef} = require('../lib/utilities/settings')
 const defaultSettings = require('../lib/utilities/default-settings.json')
 const {validSchema, an_instance} = require('./constants')
 const StateMachine = require('../lib/models/state-machine')
-const WorkflowInstance = require('../lib/models/workflow-instance')
-const status = require('../lib/models/workflow-instance-constants')
+// const WorkflowInstance = require('../lib/models/workflow-instance')
+// const status = require('../lib/models/workflow-instance-constants')
 
 describe('embed persistance provider', () => {
     let embed = undefined
