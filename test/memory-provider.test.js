@@ -3,11 +3,12 @@ const assert = require('assert')
 
 const uuid = require('uuid').v4
 
-const memory = require('../lib/cache/builtin/memory')
+const memory = require('../lib/cache/builtin/memory')({timeout: 300000})
 const {
     validSchema,
     an_instance
 } = require('./constants')
+
 
 const StateMachine = require('../lib/models/state-machine')
 const WorkflowInstance = require('../lib/models/workflow-instance')

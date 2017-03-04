@@ -3,8 +3,6 @@ const assert = require('assert')
 
 const engine = require('nosql')
 
-const {initSettings, resetDef} = require('../lib/utilities/settings')
-const defaultSettings = require('../lib/utilities/default-settings.json')
 const {validSchema, an_instance} = require('./constants')
 const StateMachine = require('../lib/models/state-machine')
 // const WorkflowInstance = require('../lib/models/workflow-instance')
@@ -15,15 +13,11 @@ describe('embed persistance provider', () => {
     let db = undefined
     before((done) => {
         global.appRootDir = require('path').resolve(__dirname)
-        embed = require('../lib/persistance/builtin/embed')
-        initSettings(defaultSettings, {
-            persistance: {
-                "provider": "embed",
+        embed = require('../lib/persistance/builtin/embed')({
                 "options": {
-                    "path": "~/test/persistance/statemachines.nosql"
+                    "path": "~/persistance/statemachines.nosql"
                 }
-            }
-        })
+            })
         db = engine.load(`${__dirname}/persistance/statemachines.nosql`)
         db.insert(Object.assign({}, validSchema, { kind: "StateMachines" })).callback((err) => {
             db.insert(Object.assign({}, an_instance, { kind: "Instances" })).callback((err) => {
@@ -33,7 +27,6 @@ describe('embed persistance provider', () => {
     })
     after((done) => {
         global.appRootDir = undefined
-        resetDef()
         db = engine.load(`${__dirname}/persistance/statemachines.nosql`)
         db.remove().make((builder) => {
             builder.callback(() => {
