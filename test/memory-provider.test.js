@@ -15,7 +15,7 @@ const WorkflowInstance = require('../lib/models/workflow-instance')
 
 describe('Memory cache provider', () => {
 
-    it('should add StateMachine in Memory cache', (done) => {
+    it.skip('should add StateMachine in Memory cache', (done) => {
         StateMachine.load(validSchema, (err, sm) => {
             memory.pushStateMachine(sm, () => {
                 memory.getStateMachine(sm.name, sm.version, (err, res) => {
@@ -25,7 +25,7 @@ describe('Memory cache provider', () => {
             })
         })
     })
-    it('should get error when get a StateMachine not in cache', (done) => {
+    it.skip('should get error when get a StateMachine not in cache', (done) => {
         StateMachine.load(validSchema, (err, sm) => {
             memory.pushStateMachine(sm, () => {
                 memory.getStateMachine(sm.name, "1.1.0", (err, res) => {
@@ -36,7 +36,7 @@ describe('Memory cache provider', () => {
             })
         })
     })
-    it('should remove StateMachine from cache', (done) => {
+    it.skip('should remove StateMachine from cache', (done) => {
         StateMachine.load(validSchema, (err, sm) => {
             memory.pushStateMachine(sm, () => {
                 memory.removeStateMachine(sm.name, sm.version, () => {
@@ -49,7 +49,7 @@ describe('Memory cache provider', () => {
         })
     })
 
-    it('should add Instance in Memory cache', (done) => {
+    it.skip('should add Instance in Memory cache', (done) => {
         let plain = Object.assign({}, an_instance)
         plain.instanceId = uuid()
         let inst = WorkflowInstance.fromPlain(plain)
@@ -63,7 +63,7 @@ describe('Memory cache provider', () => {
         })
     })
 
-    it('should remove Instance from Memory cache', (done) => {
+    it.skip('should remove Instance from Memory cache', (done) => {
         let plain = Object.assign({}, an_instance)
         plain.instanceId = uuid()
         let inst = WorkflowInstance.fromPlain(plain)
@@ -80,7 +80,7 @@ describe('Memory cache provider', () => {
         })
     })
 
-    it ('should Instance removed after period of time', (done) => {
+    it.skip('should Instance removed after period of time', (done) => {
         let plain = Object.assign({}, an_instance)
         plain.instanceId = uuid()
         let inst = WorkflowInstance.fromPlain(plain)
@@ -97,7 +97,7 @@ describe('Memory cache provider', () => {
         })
     })
 
-    it ('should Instance renew timeout', (done) => {
+    it.skip('should Instance renew timeout', (done) => {
         let plain = Object.assign({}, an_instance)
         plain.instanceId = uuid()
         let inst = WorkflowInstance.fromPlain(plain)

@@ -1,12 +1,19 @@
 {
     "cache": {
-        "provider": "memory",
-        "timeout": 300000
+        "provider": "redis",
+        "timeout": 300000,
+        "extra": {
+            "port": 6379,
+            "host": "localhost",
+            "db": 0
+        }
     },
     "persistance": {
-        "provider": "embed",
+        "provider": "mongo",
         "options": {
-            "path": "~/persistance/statemachines.nosql"
+            "server": "localhost",
+            "port": "27017",
+            "database": "uStateMachine"
         }
     }
 }
