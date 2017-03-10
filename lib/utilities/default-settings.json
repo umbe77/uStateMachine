@@ -2,7 +2,7 @@
     "cache": {
         "provider": "redis",
         "timeout": 300000,
-        "extra": {
+        "options": {
             "port": 6379,
             "host": "localhost",
             "db": 0
