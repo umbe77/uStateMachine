@@ -16,7 +16,7 @@ describe('embed persistance provider', () => {
     let db = undefined
     before((done) => {
         global.appRootDir = require('path').resolve(__dirname)
-        embed = require('../lib/persistance/builtin/embed')({
+        embed = require('./providers/embed')({
             "options": {
                 "path": "~/persistance/statemachines.nosql"
             }

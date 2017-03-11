@@ -1,5 +1,5 @@
-const StateMachine = require('../../models/state-machine')
-const WorkflowInstance = require('../../models/workflow-instance')
+const StateMachine = require('../../lib/models/state-machine')
+const WorkflowInstance = require('../../lib/models/workflow-instance')
 const engine = require('nosql')
 
 
