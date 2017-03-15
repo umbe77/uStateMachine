@@ -70,7 +70,7 @@ describe('Redis Cache Provider', () => {
         })
     })
 
-    it ('should remove StateMachine from cache', (done) => {
+    it('should remove StateMachine from cache', (done) => {
         r.hmset(`${validSchema.name}:${validSchema.version}`, 'sm', JSON.stringify(validSchema), 'hash', validSchema.hash, (err, result) => {
             redis.removeStateMachine(validSchema.name, validSchema.version, (err, result) => {
                 assert.ok(result)
@@ -78,6 +78,19 @@ describe('Redis Cache Provider', () => {
                     done()
                 })
             })
-        })        
+        })
+    })
+
+    it('should add Instance in Memory cache', (done) => {
+        let plain = Object.assign({}, an_instance)
+        plain.instanceId = uuid()
+        let inst = WorkflowInstance.fromPlain(plain)
+        redis.pushInstance(inst, (err, result) => {
+            assert.ifError(err)
+            assert.ok(result)
+            r.del(inst.instanceId, () => {
+                done()
+            })
+        })
     })
 })

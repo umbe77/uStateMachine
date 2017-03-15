@@ -18,6 +18,9 @@
         "smName": {
             "type": "string"
         },
+        "hash": {
+            "type": "string"
+        },
         "lastChangeDate": {
             "type": "string",
             "format": "date-time"
@@ -30,7 +33,7 @@
             "enum": [
                 "Idle",
                 "Locked",
-                "Active"
+                "Processing"
             ]
         }
     },

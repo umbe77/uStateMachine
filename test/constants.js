@@ -274,6 +274,7 @@ const an_instance = {
     "instanceId": "27e8f2bf-e9a4-4503-b0a0-5a5c67259fc2",
     "version": "1.0.0",
     "smName":  "FirstWF",
+    "hash": "",
     "currentState": "PreOrder",
     "lastChangeDate": new Date(Date.parse('2017-03-03T00:38:03')),
     "status": status.IDLE,
