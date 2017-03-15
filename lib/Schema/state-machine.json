@@ -11,6 +11,12 @@
             "type": "string",
             "pattern": "^\\d+\\.\\d+\\.\\d+$"
         },
+        "hash": {
+            "type": "string"
+        },
+        "dataSchema": {
+            "type": "object"
+        },
         "states": {
             "type": "object",
             "patternProperties": {
