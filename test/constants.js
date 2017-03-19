@@ -278,6 +278,7 @@ const an_instance = {
     "currentState": "PreOrder",
     "lastChangeDate": new Date(Date.parse('2017-03-03T00:38:03')),
     "status": status.IDLE,
+    "lockingId": null,
     "data": {
         "firstName": "Roberto",
         "lastName": "Ughi"

@@ -35,6 +35,9 @@
                 "Locked",
                 "Processing"
             ]
+        },
+        "lockingId": {
+            "type": "string"
         }
     },
     "required": [
