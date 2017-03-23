@@ -30,11 +30,11 @@ describe('mongodb persistance provider', () => {
             })
         })
     })
-    after((done) => {
-        database.dropDatabase(() => {
-            done()
-        })
-    })
+    // after((done) => {
+    //     database.dropDatabase(() => {
+    //         done()
+    //     })
+    // })
 
     it('should load statemachines', (done) => {
         const _sm = StateMachine.fromPlain(validSchema)
