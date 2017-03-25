@@ -5,7 +5,8 @@
     "title": "State",
     "properties": {
         "name": {
-            "type": "string"
+            "type": "string",
+            "pattern": "^\\w+$"
         },
         "onEnter": {
             "type": "string"
@@ -20,6 +21,9 @@
                     "$ref": "/transition"
                 }
             }
+        },
+        "isFinal": {
+            "type": "boolean"
         }
     },
     "required": [

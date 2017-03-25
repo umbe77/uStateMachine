@@ -5,6 +5,10 @@
     "title": "StateMachine",
     "properties": {
         "name": {
+            "type": "string",
+            "pattern": "^\\w+$"
+        },
+        "description": {
             "type": "string"
         },
         "version": {
@@ -29,9 +33,6 @@
         "initial": {
             "type": "string",
             "pattern": "^\\w+$"
-        },
-        "isCurrentVersion": {
-            "type": "boolean"
         }
     },
     "required": ["name", "version", "states", "initial"],
