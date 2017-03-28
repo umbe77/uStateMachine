@@ -17,14 +17,14 @@ const mongo = require('../lib/persistance/builtin/mongo')({
     options: {
         server: "localhost",
         port: "27017",
-        database: "uStateMachine"
+        database: "uStateMachineTestdb"
     }
 })
 
 describe('mongodb persistance provider', () => {
     let database = undefined
     before((done) => {
-        MongoClient.connect("mongodb://localhost:27017/uStateMachine", (err, db) => {
+        MongoClient.connect("mongodb://localhost:27017/uStateMachineTestdb", (err, db) => {
             database = db
             Promise.all([
                 db.collection("StateMachines").insertOne(Object.assign({}, validSchema)),

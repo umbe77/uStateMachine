@@ -42,7 +42,7 @@ describe('Redis Cache Provider', function () {
     })
 
     it('should push StateMachine in cache', (done) => {
-        redis.pushStateMachine(StateMachine.fromPlain(validSchema), (result) => {
+        redis.pushStateMachine(StateMachine.fromPlain(validSchema), (err, result) => {
             assert.ok(result)
             r.del(`${validSchema.name}:${validSchema.version}`, () => {
                 done()
@@ -51,8 +51,8 @@ describe('Redis Cache Provider', function () {
     })
 
     it('should StateMachine just in cache', (done) => {
-        r.hmset(`${validSchema.name}:${validSchema.version}`, 'sm', JSON.stringify(validSchema), 'hash', validSchema.hash, (err, result) => {
-            redis.pushStateMachine(StateMachine.fromPlain(validSchema), (result) => {
+        r.hmset(`${validSchema.name}:${validSchema.version}`, 'sm', JSON.stringify(validSchema), 'hash', validSchema.hash, () => {
+            redis.pushStateMachine(StateMachine.fromPlain(validSchema), (err, result) => {
                 assert.ok(!result)
                 r.del(`${validSchema.name}:${validSchema.version}`, () => {
                     done()
@@ -62,7 +62,7 @@ describe('Redis Cache Provider', function () {
     })
 
     it('should get StateMachine FirstWF from cache', (done) => {
-        r.hmset(`${validSchema.name}:${validSchema.version}`, 'sm', JSON.stringify(validSchema), 'hash', validSchema.hash, (err, result) => {
+        r.hmset(`${validSchema.name}:${validSchema.version}`, 'sm', JSON.stringify(validSchema), 'hash', validSchema.hash, () => {
             redis.getStateMachine('FirstWF', '1.0.0', (err, sm) => {
                 validSchema["dataSchema"] = undefined
                 validSchema["hash"] = undefined
@@ -75,7 +75,7 @@ describe('Redis Cache Provider', function () {
     })
 
     it('should remove StateMachine from cache', (done) => {
-        r.hmset(`${validSchema.name}:${validSchema.version}`, 'sm', JSON.stringify(validSchema), 'hash', validSchema.hash, (err, result) => {
+        r.hmset(`${validSchema.name}:${validSchema.version}`, 'sm', JSON.stringify(validSchema), 'hash', validSchema.hash, () => {
             redis.removeStateMachine(validSchema.name, validSchema.version, (err, result) => {
                 assert.ok(result)
                 r.del(`${validSchema.name}:${validSchema.version}`, () => {
