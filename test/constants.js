@@ -270,6 +270,16 @@ const smFirst_2 = {
     "initial": "PreOrder"
 }
 
+const smGroup = {
+    "name": "TestWf",
+    "version": "1.0.0"
+}
+
+const smGroup2 = {
+    "name": "TestWf2",
+    "version": "1.0.0"
+}
+
 const an_instance = {
     "instanceId": "27e8f2bf-e9a4-4503-b0a0-5a5c67259fc2",
     "version": "1.0.0",
@@ -294,5 +304,7 @@ module.exports = {
     smFirst_2,
     validSchema_wrongstate,
     validSchema_dontchecktransition,
-    an_instance
+    an_instance,
+    smGroup,
+    smGroup2
 }
