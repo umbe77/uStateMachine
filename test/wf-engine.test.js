@@ -1,6 +1,8 @@
 const mocha = require('mocha')
 const assert = require('assert')
 
+const WorkflowInstance = require('../lib/models/workflow-instance')
+
 const MongoClient = require('mongodb')
 const {
     validSchema,
@@ -59,6 +61,36 @@ describe('Core engine test', () => {
         wfEngine.addStateMachine(validSchema, (err) => {
             assert.ifError(err)
             done()
+        })
+    })
+
+    it('should create a brand new instance', (done) => {
+        wfEngine.createInstance(validSchema.name, {
+            firstName: "Roberto",
+            lastName: "Ughi"
+        }, (err, instanceId) => {
+            assert.ifError(err, "No Error in instance creation")
+
+            r.hget(instanceId, "inst", (err, result) => {
+                assert.ifError(err)
+
+                let inst = WorkflowInstance.fromPlain(JSON.parse(inst))
+
+                assert.equal(inst.currentState, "PreOrder", 'Initial State is PreOrder')
+                assert.deepEqual(inst.data, {
+                    firstName: "Roberto",
+                    lastName: "Ughi"
+                }, 'instance data is as excpeted')
+
+            })
+
+            database.collection('Instances').findOne({"instanceId": instanceId}, (err, result) => {
+                assert.ifError(err)
+                assert.ok(result)
+            })
+
+            done()
+
         })
     })
 })
