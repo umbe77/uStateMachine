@@ -26,7 +26,7 @@ const persistance = require('../lib/persistance/builtin/mongo')({
         port: "27017",
         database: "uStateMachineTest"
     }
-})
+}, true)
 
 const wfEngine = require('../lib/wf-engine')(cache, persistance)
 

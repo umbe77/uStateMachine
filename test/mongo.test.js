@@ -19,7 +19,7 @@ const mongo = require('../lib/persistance/builtin/mongo')({
         port: "27017",
         database: "uStateMachineTestdb"
     }
-})
+}, true)
 
 describe('mongodb persistance provider', () => {
     let database = undefined
