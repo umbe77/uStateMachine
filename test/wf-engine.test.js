@@ -74,7 +74,7 @@ describe('Core engine test', () => {
             r.hget(instanceId, "inst", (err, result) => {
                 assert.ifError(err)
 
-                let inst = WorkflowInstance.fromPlain(JSON.parse(inst))
+                let inst = WorkflowInstance.fromPlain(JSON.parse(result))
 
                 assert.equal(inst.currentState, "PreOrder", 'Initial State is PreOrder')
                 assert.deepEqual(inst.data, {
