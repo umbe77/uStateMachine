@@ -93,7 +93,6 @@ describe('Core engine test', () => {
 
         })
     })
-    //TODO: add test for instance execution
 
     it('should execute an instance', (done) => {
         let instanceId = WorkflowInstance.fromPlain(an_instance).instanceId
