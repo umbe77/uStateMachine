@@ -106,7 +106,9 @@ describe('Redis Cache Provider', function () {
         redis.getInstance(plain.instanceId, (err, instance) => {
             assert.ifError(err)
             plain.status = status.PROCESSING
-            assert.deepEqual(instance.plain(), plain)
+            let plainInstance = instance.plain()
+            plainInstance.lockingId = null
+            assert.deepEqual(plainInstance, plain)
             r.hget(plain.instanceId, 'status', (err, result) => {
                 assert.equal(result, status.PROCESSING)
                 r.del(plain.instanceId, () => {

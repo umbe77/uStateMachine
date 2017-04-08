@@ -93,4 +93,23 @@ describe('Core engine test', () => {
 
         })
     })
+    //TODO: add test for instance execution
+
+    it('should execute an instance', (done) => {
+        let instanceId = WorkflowInstance.fromPlain(an_instance).instanceId
+        database.collection("StateMachines").insertOne(Object.assign({}, validSchema), () => {
+            wfEngine.executeInstance({
+                instanceId,
+                transition: "InOrder",
+                data: {
+                    firstName: "Umbe"
+                }
+            }, (err, result) => {
+                let newInstance = result.instance
+                assert.equal(newInstance.currentState, "InOrder")
+                assert.equal(newInstance.data.firstName, "Umbe")
+                done()
+            })
+        }) 
+    })
 })
