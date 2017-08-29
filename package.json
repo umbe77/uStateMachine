@@ -17,8 +17,8 @@
     "jsonschema": "^1.1.1",
     "mongodb": "^2.2.24",
     "nosql": "^5.0.1",
-    "restserver": "git+https://github.com/umbe77/uRestServer.git",
     "semver": "^5.3.0",
+    "urestserver": "git+https://github.com/umbe77/uRestServer.git",
     "uuid": "^3.0.1"
   },
   "devDependencies": {

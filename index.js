@@ -1,37 +1,11 @@
+const path = require('path')
+const {rest} = require('urestserver')
+const settings = require('./lib/utilities/settings').getSettings()
 
-global.appRootDir = __dirname
-
-const StateMachine = require('./models/state-machine')
-
-
-
-let sm = StateMachine.load({
-    name: "FirstWF",
-    version: "1.0.0",
-    states: {
-        "PreOrder": {
-            name: "PreOrder",
-            transitions: {
-                "InOrder": {
-                    destination: "InOrder"
-                },
-                "OrderSent": {
-                    destination: "OrderSent"
-                }
-            }
-        },
-        "InOrder": {
-            name: "InOrder",
-            transitions: {
-                "OrderSent": {
-                    destination: "OrderSent"
-                }
-            }
-        },
-        "OrderSent": {
-            name: "OrderSent",
-            transitions: {}
-        }
-    },
-    initial: "PreOrder"
+rest.createRest({
+    port: settings.port,
+    controllerPath: path.resolve('./lib/restServer')
 })
+.loadControllers(path.resolve('./lib/restServer'))
+.run()
+
