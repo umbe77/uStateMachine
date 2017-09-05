@@ -1,0 +1,27 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema",
+    "id": "/workflow-instance-track",
+    "title": "WorkflowInstanceTrack",
+    "description": "Workflow Instance Track definition",
+    "properties": {
+        "instanceId": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+        },
+        "state": {
+            "type": "string"
+        },
+        "trackingDate": {
+            "type": "string",
+            "format": "date-time"
+        },
+        "instanceData": {
+            "type": "object",
+            "$ref": "/workflow-instance"
+        }
+    },
+    "required": [
+        "instanceId", "state", "trackingDate", "instanceData"
+    ],
+    "additionalProperties": false
+}
