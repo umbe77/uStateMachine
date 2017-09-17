@@ -16,10 +16,10 @@
             "pattern": "^\\d+\\.\\d+\\.\\d+$"
         },
         "hash": {
-            "type": "string"
+            "type": ["string", "null"]
         },
         "dataSchema": {
-            "type": "object"
+            "type": ["object", "null"]
         },
         "states": {
             "type": "object",
