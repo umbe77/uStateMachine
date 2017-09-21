@@ -15,5 +15,9 @@
             "port": "27017",
             "database": "uStateMachine"
         }
+    },
+    "log": {
+        "level": "info",
+        "path": "./log"
     }
 }
